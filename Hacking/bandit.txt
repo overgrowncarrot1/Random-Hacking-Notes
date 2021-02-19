@@ -1,0 +1,93 @@
+sudo apt install putty
+bandit.labs.overthewire.org 2220
+bandit0
+bandit0
+**********
+Level 0 to Level 1
+
+cd /home
+cd bandit1
+cat readme
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+**********
+Level 1 to Level 2
+cat <-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+**********
+Level 2 to Level 3
+cat spaces\ in\ this\ filename
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+**********
+Level 3 to Level 4
+cd inhere
+ls -la
+cat .hidden
+pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+**********
+Level 4 to Level 5
+cd inhere
+cat <- file07 (did this all the way to 7)
+koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+*********
+Level 5 to Level 6
+cd ~/inhere/maybehere07 (did this a bunch used that command to just press up then change the dir)
+cat .file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+*********
+Level 6 to level 7
+find / -user bandit7 -group bandit6 -size 33c
+cat /var/lib/dpkg/info/bandit7.password
+HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+*********
+Level 7 to Level 8
+ls -la
+grep -w millionth data.txt
+cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+*********
+Level 8 to Level 9
+sort data.txt | uniq -u (didnt know about the -u had to read some stuff for that, thanks)
+UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+*********
+Level 9 to Level 10
+strings data.txt
+truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+*********
+Level 10 to Level 11
+base64 -d data.txt
+IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+*********
+Level 11 to Level 12
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+*********
+Level 12 to Level 13
+cat data.txt
+mkdir /tmp/bandit12
+cp data.txt /tmp/bandit12/
+cd /tmp/bandit12
+mv data.txt test.txt
+file test.txt
+xxd -r test.txt data1
+file data 1
+mv data1 data2.gz
+gzip -d data2.gz
+mv data2 data3.bz2
+bzip2 -d data3.bz2
+file data3
+mv data3 data4.gz
+gzip -d data4.gz
+file data4
+tar -xvf data4
+file data 5.bin
+tar -xvf data5.bin
+file data6.bin
+mv data6.bin data7.bz2
+bzip2 -d data7.bz2
+file data7
+file data8.bin
+mv data7.bin data9.gz
+gzip -d data9.gz
+file data9
+cat data9
+
+

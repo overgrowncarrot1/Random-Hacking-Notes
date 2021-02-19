@@ -1,0 +1,5 @@
+sudo apt update  
+sudo apt install python2 ca-certificates python3-httplib2
+cd ~
+wget http://mirrors.kernel.org/ubuntu/pool/universe/p/python-httplib2/python-httplib2_0.14.0-1ubuntu1_all.deb  
+sudo apt install ./python-httplib2_0.14.0-1ubuntu1_all.deb 

